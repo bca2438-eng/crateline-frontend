@@ -58,7 +58,7 @@ export default function Products() {
     try {
       if (editingProduct) {
         const token = localStorage.getItem('token');
-        await axios.put(`http://127.0.0.1:8000/products/${editingProduct.pid}`, {
+        await axios.put(`https://crateline-api-production.up.railway.app/products/${editingProduct.pid}`, {
           name: form.name, price: parseFloat(form.price), quantity: parseInt(form.quantity),
           category_id: parseInt(form.category_id), reorder_level: parseInt(form.reorder_level),
         }, { headers: { Authorization: `Bearer ${token}` } });
