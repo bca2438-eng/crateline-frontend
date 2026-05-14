@@ -1,4 +1,3 @@
-cat > src/pages/Products.js << 'EOF'
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getProducts, createProduct, deleteProduct, getCategories } from '../services/api';
@@ -323,4 +322,3 @@ const styles = {
   summaryNum: { fontSize: '26px', fontWeight: '900', margin: '0 0 4px 0', color: '#2c3e50' },
   summaryLabel: { fontSize: '10px', color: '#95a5a6', margin: 0, letterSpacing: '1px' },
 };
-EOF
