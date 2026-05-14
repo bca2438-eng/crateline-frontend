@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+cat > src/pages/Products.js << 'EOF'
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getProducts, createProduct, deleteProduct, getCategories } from '../services/api';
 import { useUser } from '../components/Layout';
@@ -22,16 +23,7 @@ export default function Products() {
   const location = useLocation();
   const LIMIT = 10;
 
-  useEffect(() => {
-    fetchCategories();
-    if (location.search.includes('lowstock=true')) setFilterLowStock(true);
-  }, [location]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, [currentPage, search, filterLowStock, filterCategory]);
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const params = { page: currentPage, limit: LIMIT };
       if (search) params.search = search;
@@ -44,7 +36,16 @@ export default function Products() {
     } catch {
       setError('Failed to load products.');
     }
-  };
+  }, [currentPage, search, filterLowStock, filterCategory]);
+
+  useEffect(() => {
+    fetchCategories();
+    if (location.search.includes('lowstock=true')) setFilterLowStock(true);
+  }, [location]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const fetchCategories = async () => {
     try {
@@ -322,3 +323,4 @@ const styles = {
   summaryNum: { fontSize: '26px', fontWeight: '900', margin: '0 0 4px 0', color: '#2c3e50' },
   summaryLabel: { fontSize: '10px', color: '#95a5a6', margin: 0, letterSpacing: '1px' },
 };
+EOF

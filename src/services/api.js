@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://crateline-api-production.up.railway.app',
+  baseURL: 'http://localhost:8000',
 });
 
 API.interceptors.request.use((config) => {
