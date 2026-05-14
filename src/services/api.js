@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const API = axios.create({
-baseURL: 'http://localhost:8000',
+  baseURL: 'http://localhost:8000',
+});
+
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -33,3 +35,5 @@ export const deleteCategory = (cid) => API.delete(`/categories/${cid}`);
 export const updateStock = (pid, amount, type) =>
   API.post(`/stock/update?pid=${pid}&amount=${amount}&type=${type}`);
 export const getStockLogs = (pid) => API.get(`/stock/logs/${pid}`);
+
+export default API;
