@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000',
-});
+baseURL: 'https://crateline-api-production.up.railway.app',});
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
